@@ -1,0 +1,188 @@
+.header {
+	height: 100%;
+	box-shadow: $shadow-1;
+}
+// ad---------------------------------
+.ad {
+	width: 100%;
+	height: 54px;
+	background-image: url('../../public/images/header-ad.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	align-items: center;
+	& .ad__content {
+		color: #fff;
+		font-weight: 600;
+		& span {
+			color: yellow;
+		}
+		@media screen and (max-width: 850px) {
+			font-size: 20px;
+		}
+		@media screen and (max-width: 720px) {
+			font-size: 16px;
+		}
+	}
+	& .ad__btn {
+		background-color: #333;
+		padding: 8px 20px;
+		color: yellow;
+		text-transform: uppercase;
+		box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+		border-radius: 3px;
+		@media screen and (max-width: 850px) {
+			font-size: 14px;
+			padding: 5px 12px;
+		}
+	}
+	@media screen and (max-width: 590px) {
+		display: none;
+	}
+}
+// top----------------------------------------
+.top {
+	background: #f8f8f8;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	&__container {
+		max-width: 95%;
+		margin: 0 auto;
+		padding: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__list {
+		display: flex;
+		gap: 15px;
+		.li {
+			position: relative;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 4px;
+			color: #666;
+			.flex {
+				display: flex;
+				align-items: center;
+				gap: 2px;
+				svg {
+					transform: scale(1.2);
+					margin-right: 3px;
+				}
+			}
+			img {
+				width: 28px;
+				height: 28px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+			svg {
+				width: 20px;
+				height: 20px;
+				fill: #ccc;
+			}
+			span {
+				font-size: 12px;
+			}
+			&:not(:last-child):after {
+				content: '';
+				position: absolute;
+				right: -8px;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 1px;
+				height: 20px;
+				background: #ccc;
+			}
+			&:hover {
+				span {
+					color: #000;
+				}
+				svg {
+					fill: #111;
+				}
+			}
+			.li {
+				@media screen and (max-width: 670px) {
+					&:nth-of-type(2),
+					&:nth-of-type(3),
+					&:nth-of-type(4) {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+// UserMenu-----------------------------
+.menu {
+	width: 280px;
+	box-shadow: $shadow-1;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background: #fff;
+	z-index: 99;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem 0;
+	h4 {
+		text-align: center;
+	}
+	.flex {
+		width: 100%;
+		padding: 5px 1rem;
+		gap: 10px !important;
+	}
+	ul {
+		li {
+			height: 40px;
+			display: flex;
+			align-items: center;
+			a {
+				width: 100%;
+				padding-left: 1rem;
+			}
+			&:hover {
+				background-color: $grey-color;
+			}
+		}
+	}
+	&__img {
+		width: 80px !important;
+		height: 80px !important;
+	}
+	& .col {
+		display: flex;
+		flex-direction: column;
+		span {
+			font-size: 14px;
+			color: $blue-color;
+			text-decoration: underline;
+		}
+	}
+}
+// cart style ---------------------------------------
+.main {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 70px;
+	&__container {
+		max-width: 1200px;
+		padding: 0 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		width: 100%;
+	}
+}
