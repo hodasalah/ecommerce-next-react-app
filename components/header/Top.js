@@ -3,13 +3,12 @@ import { useState } from "react"
 import { BsSuitHeart } from "react-icons/bs"
 import { MdSecurity } from "react-icons/md"
 import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri"
-import flag from "../../public/images/egyptFlag.png"
 import profile from "../../public/images/profile.jpeg"
 
 import styles from "./styles.module.scss"
 import UserMenu from "./UserMenu"
 
-const Top = () =>
+const Top = ({ country }) =>
 {
   const [loggedIn, setLoggedIn] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -19,8 +18,8 @@ const Top = () =>
         <div></div>
         <ul className={styles.top__list}>
           <li className={styles.li}>
-            <img src={flag.src} alt="egypt flag" />
-            <span>Egypt / usd</span>
+            <img src={country.flag.emojitwo} alt="flag" />
+            <span>{country.name}/ usd </span>
           </li>
           <li className={styles.li}>
             <MdSecurity />
