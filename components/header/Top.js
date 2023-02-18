@@ -40,19 +40,19 @@ const Top = () =>
 
           </li>
           <li className={styles.li} onMouseOver={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
-            {loggedIn ? <li >
+            {loggedIn ? <div >
               <div className={styles.flex}>
                 <img src={profile.src} alt={"hoda salah"} />
                 <span>Hoda Salah</span>
                 <RiArrowDropDownFill />
               </div>
-            </li> : <li>
+            </div> : <div>
               <div className={styles.flex}>
                 <RiAccountPinCircleLine />
                 <span>Account</span>
                 <RiArrowDropDownFill />
               </div>
-            </li>}
+            </div>}
             {visible && <UserMenu loggedIn={loggedIn} />}
           </li>
 

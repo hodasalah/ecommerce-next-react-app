@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import favicon from "../public/images/favicon.png"
 import store from "../store"
 
 // second step is create persistor
@@ -18,7 +19,8 @@ export default function App({ Component, pageProps })
         <title>HODA_SHOP</title>
         <meta name="description" content="HODA_SHOP is an inline shopping app for all" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={favicon.src} sizes="512x512" />
+        
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
