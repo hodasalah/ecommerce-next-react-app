@@ -8,7 +8,7 @@
 	}
 }
 body {
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 }
@@ -26,6 +26,15 @@ h4,
 h5,
 h6 {
 	overflow-wrap: break-word;
+}
+b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Oswald', sans-serif;
 }
 img,
 video,
@@ -45,4 +54,23 @@ ul {
 button {
 	border: none;
 	outline: none;
+}
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	font-family: 'Oswald', sans-serif;
+	h1 {
+		font-size: 40px;
+		min-width:120px;
+		@media (max-width: 912px) {
+			font-size: 35px;
+		}
+		@media (max-width: 465px) {
+			font-size: 30px;
+		}
+	}
+}
+.oswald {
+	font-family: 'Oswald', sans-serif;
 }
