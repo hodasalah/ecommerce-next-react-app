@@ -13,10 +13,10 @@ const config = {
   storage: storage
 }
 // forth step create persistreducer
-const reducer = persistReducer(config, reducers)
+const rootReducer = persistReducer(config, reducers)
 // create our store
 const store = configureStore({
-  reducer: reducer,
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: [thunk]
 })

@@ -1,16 +1,15 @@
-import { Inter } from '@next/font/google';
 import axios from "axios";
 import Footer from "../components/footer";
 import Header from './../components/header/index';
 import { useSession, signIn, signOut } from "next-auth/react"
 
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ country })
 {
-  
-  console.log(country)
+  const {data:session}=useSession()
+  console.log(session)
+  //console.log(country)
   return (
     <main>
       <Header country={country} />

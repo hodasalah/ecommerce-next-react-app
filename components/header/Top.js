@@ -5,21 +5,22 @@ import { MdSecurity } from "react-icons/md"
 import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri"
 import profile from "../../public/images/profile.jpeg"
 
-import styles from "./styles.module.scss"
+import { useSession } from 'next-auth/react'
 import UserMenu from "./UserMenu"
+import styles from "./styles.module.scss"
 
 const Top = ({ country }) =>
 {
-  const [loggedIn, setLoggedIn] = useState(false)
   const [visible, setVisible] = useState(false)
+  const { data: session } = useSession()
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
         <div></div>
         <ul className={styles.top__list}>
           <li className={styles.li}>
-            <img src={country.flag.emojitwo} alt="flag" />
-            <span>{country.name}/ usd </span>
+            <img src={country?.flag?.emojitwo} alt="flag" />
+            <span>{country?.name}/ usd </span>
           </li>
           <li className={styles.li}>
             <MdSecurity />
@@ -39,10 +40,10 @@ const Top = ({ country }) =>
 
           </li>
           <li className={styles.li} onMouseOver={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
-            {loggedIn ? <div >
+            {session ? <div >
               <div className={styles.flex}>
-                <img src={profile.src} alt={"hoda salah"} />
-                <span>Hoda Salah</span>
+                <img src={session.user.image ? session.user.image : profile.src} alt={"hoda salah"} />
+                <span>{session.user.name}</span>
                 <RiArrowDropDownFill />
               </div>
             </div> : <div>
@@ -52,7 +53,7 @@ const Top = ({ country }) =>
                 <RiArrowDropDownFill />
               </div>
             </div>}
-            {visible && <UserMenu loggedIn={loggedIn} />}
+            {visible && <UserMenu session={session} />}
           </li>
 
         </ul>
