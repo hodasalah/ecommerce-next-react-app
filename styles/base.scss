@@ -1,6 +1,10 @@
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 $blue-color: #3e8cc7;
 $grey-color: #f8f8f8;
+$light-error-color: #fd010169;
+$error-color: #ed4337;
+$logo-red-color:#e45354;
+$logo-black-color:#112956;
 .btn__primary {
 	display: flex;
 	align-items: center;
@@ -27,8 +31,8 @@ $grey-color: #f8f8f8;
 	border-radius: 3px;
 	height: 35px;
 }
-.flex{
-	display:flex;
-	align-items:center;
-	gap:5px
+.flex {
+	display: flex;
+	align-items: center;
+	gap: 5px;
 }
