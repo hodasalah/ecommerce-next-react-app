@@ -30,7 +30,6 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/signin",
-    signUp: "/signup",
   },
   session: {
     strategy: "jwt"
