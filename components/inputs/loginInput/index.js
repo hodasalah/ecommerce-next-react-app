@@ -7,7 +7,6 @@ import styles from "./styles.module.scss"
 const LoginInput = ({ icon, placeholder, ...props }) =>
 {
   const [field, meta] = useField(props);
-  console.log(meta)
   return (
     <div className={`${ styles.input } ${ meta.touched && meta.error ? styles.error : "" }`}>
       {icon === "user" ? <BiUser /> :
