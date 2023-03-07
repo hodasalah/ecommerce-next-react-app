@@ -23,8 +23,11 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         <link rel="icon" href={favicon.src} sizes="512x512" />
 
       </Head>
+      {/* session provider for next auth configuration */}
       <SessionProvider session={session}>
+        {/* Provider for redux configuration */}
         <Provider store={store}>
+          {/* persistGate for redux-persist configuration */}
           <PersistGate loading={null} persistor={persistor}>
             <Component {...pageProps} />
           </PersistGate>

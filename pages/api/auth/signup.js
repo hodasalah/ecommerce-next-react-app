@@ -27,10 +27,12 @@ handler.post(async (req, res) =>
     const cryptedPassword = await bcrypt.hash('password', 12);
     const newUser = new User({ name, email, password: cryptedPassword })
     const addedUser = await newUser.save();
+
     const activation_token = createActivationToken({
       id: addedUser._id.toString(),
     })
-    res.send(activation_token);
+    const url = `${ process.env.BASE_URL }/activate/${ activation_token }`
+    res.send(url);
 
     return res.status(200).json({ message: "Sign up successfully" })
   } catch (error) {
