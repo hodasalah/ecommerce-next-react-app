@@ -16,7 +16,7 @@ const UserMenu = ({ session }) =>
           <span onClick={() => signOut()}>Sign out</span>
         </div>
       </div> : <div className={styles.flex}>
-        <button className={styles.btn__primary}>Sign Up</button>
+        <button className={styles.btn__primary}><Link href="/signup">Sign Up</Link></button>
         <button onClick={() => signIn()} className={styles.btn__outlined}>Login</button>
       </div>
       }
