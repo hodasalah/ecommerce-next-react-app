@@ -2,6 +2,8 @@ import CircledIconButton from "@/components/buttons/circledIconButton"
 import { Form, Formik } from "formik"
 import Link from "next/link"
 import { useState } from 'react'
+import { useRouter } from "next/router"
+import axios from "axios"
 import * as Yup from "yup"
 import YupPassword from 'yup-password'
 import Footer from "../components/footer"
@@ -15,8 +17,12 @@ const initialValues = {
   password: "",
   confirm_password: "",
 }
-const signup = () =>
+const SignUp = () =>
 {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
   const [user, setUser] = useState(initialValues);
   const { full_name, email, password, confirm_password } = user
   YupPassword(Yup)
@@ -27,7 +33,7 @@ const signup = () =>
   }
 
   const signUpValidation = Yup.object({
-    full_name: Yup.string().required("Please Enter your name").min(2, "Your name must be between 2 to 20 characters").max(20, "Your name must be between 2 to 20 characters").matches(/^[aA-zZ]/, "Numbers and Special Characters are not allowed"),
+    full_name: Yup.string().required("Please Enter your name").min(2, "Your name must be between 2 to 20 characters").max(20, "Your name must be between 2 to 20 characters").matches(/^[a-zA-Z\s]*$/, "Numbers and Special Characters are not allowed"),
     email: Yup.string().required("Email Address is required").email("Please enter a valid email address"),
     password: Yup.string().password().required("Password is required").min(
       8,
@@ -52,6 +58,27 @@ const signup = () =>
                 full_name, email, password, confirm_password
               }}
               validationSchema={signUpValidation}
+              onSubmit={async () => {
+                try {
+                  setLoading(true)
+                  setError("")
+                  setSuccess("")
+                  const { data } = await axios.post("/api/auth/signup", {
+                    name: full_name,
+                    email,
+                    password,
+                  })
+                  setSuccess(data.message)
+                  setLoading(false)
+                  setTimeout(() => {
+                    router.push("/signin")
+                  }, 2000)
+                } catch (err) {
+                  setLoading(false)
+                  setSuccess("")
+                  setError(err.response?.data?.message || err.message || "An error occurred")
+                }
+              }}
             >
               {(form) => (
                 <Form>
@@ -59,10 +86,12 @@ const signup = () =>
                   <LoginInput icon="email" type="email" placeholder="Type your email" name="email" onChange={handleChange} />
                   <LoginInput icon="password" type="password" placeholder="Type your password" name="password" onChange={handleChange} />
                   <LoginInput icon="password" type="password" placeholder="ReType your password" name="confirm_password" onChange={handleChange} />
-                  <CircledIconButton type="submit" text="Sign up" />
+                  <CircledIconButton type="submit" text={loading ? "Signing up..." : "Sign up"} />
+                  {error && <span className={styles.login__error}>{error}</span>}
+                  {success && <span className={styles.login__success}>{success}</span>}
                   <div className={styles.forget}>
                     <Link href="/forget">Forget Your Password ?</Link>
-                    <Link href="/signup">You are  a user ? Sign in</Link>
+                    <Link href="/signin">You are a user ? Sign in</Link>
                   </div>
                 </Form>
               )}
@@ -75,4 +104,4 @@ const signup = () =>
   )
 }
 
-export default signup;
+export default SignUp;

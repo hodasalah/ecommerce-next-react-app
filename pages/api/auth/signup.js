@@ -24,7 +24,7 @@ handler.post(async (req, res) =>
     if (password.length < 8) {
       return res.status(400).json({ message: "Password must be at least 8 characters." })
     }
-    const cryptedPassword = await bcrypt.hash('password', 12);
+        const cryptedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ name, email, password: cryptedPassword })
     const addedUser = await newUser.save();
 
@@ -32,9 +32,11 @@ handler.post(async (req, res) =>
       id: addedUser._id.toString(),
     })
     const url = `${ process.env.BASE_URL }/activate/${ activation_token }`
-    res.send(url);
-
-    return res.status(200).json({ message: "Sign up successfully" })
+    
+    return res.status(200).json({ 
+      message: "Register success! Please activate your email to start.", 
+      url 
+    })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

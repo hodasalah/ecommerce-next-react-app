@@ -11,9 +11,9 @@ const Copyright = ({ country }) =>
         <ul>
           {data.map(link => (<li key={link.name}><Link href={link.link}>{link.name}</Link></li>))}
           <li>
-            <a href="/">
+            <Link href="/">
               <IoLocationSharp /> {country?.name}
-            </a>
+            </Link>
           </li>
         </ul>
       </section>

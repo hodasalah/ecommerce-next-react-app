@@ -14,10 +14,7 @@ async function connectDb()
     }
     await mongoose.disconnect()
   }
-  const db = await mongoose.connect(process.env.MONGO_DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  const db = await mongoose.connect(process.env.MONGO_DB_URL)
   console.log("first connection  to database")
   connection.isConnected = db.connections[0].readyState;
 }

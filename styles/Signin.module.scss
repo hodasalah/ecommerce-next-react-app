@@ -123,4 +123,18 @@
 			}
 		}
 	}
+	&__error {
+		color: #ed4337;
+		font-weight: 600;
+		font-size: 14px;
+		margin: 10px 0;
+		display: block;
+	}
+	&__success {
+		color: #2e7d32;
+		font-weight: 600;
+		font-size: 14px;
+		margin: 10px 0;
+		display: block;
+	}
 }

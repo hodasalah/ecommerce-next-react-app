@@ -3,6 +3,7 @@ import { Form, Formik } from "formik"
 import { getProviders, signIn } from "next-auth/react"
 import Link from "next/link"
 import { useState } from 'react'
+import { useRouter } from "next/router"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import * as Yup from "yup"
 
@@ -15,8 +16,11 @@ const initialValues = {
   login_email: "",
   login_password: ""
 }
-const signin = ({ providers }) =>
+const SignIn = ({ providers }) =>
 {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
   const [user, setUser] = useState(initialValues);
   const { login_email, login_password } = user
   const socialsProviders = Object.values(providers)
@@ -52,12 +56,29 @@ const signin = ({ providers }) =>
                 login_email, login_password
               }}
               validationSchema={loginValidation}
+              onSubmit={async () => {
+                setLoading(true)
+                setError("")
+                const res = await signIn("credentials", {
+                  redirect: false,
+                  email: login_email,
+                  password: login_password,
+                })
+                setLoading(false)
+                if (res.error) {
+                  setError(res.error)
+                } else {
+                  setError("")
+                  router.push("/")
+                }
+              }}
             >
               {(form) => (
                 <Form>
                   <LoginInput icon="email" type="email" placeholder="Type your email" name="login_email" onChange={handleChange} />
                   <LoginInput icon="password" type="password" placeholder="Type your password" name="login_password" onChange={handleChange} />
-                  <CircledIconButton type="submit" text="Sign in" />
+                  <CircledIconButton type="submit" text={loading ? "Signing in..." : "Sign in"} />
+                  {error && <span className={styles.login__error}>{error}</span>}
                   <div className={styles.forget}>
                     <Link href="/forget">Forget Your Password ?</Link>
                     <Link href="/signup">Not a user ? Sign up</Link>
@@ -71,6 +92,7 @@ const signin = ({ providers }) =>
                 {socialsProviders.map((provider) =>
                 {
                   let providerName = provider.id
+                  if (providerName === "credentials") return null;
                   return (
                     <div key={provider.name}>
                       <button className={`${ styles.social__btn }`} onClick={() => signIn(providerName)}>
@@ -91,7 +113,7 @@ const signin = ({ providers }) =>
   )
 }
 
-export default signin
+export default SignIn
 export async function getServerSideProps(context)
 {
   const providers = await getProviders()
